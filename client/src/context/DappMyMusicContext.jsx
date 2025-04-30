@@ -225,7 +225,6 @@ export const DappMyMusicProvider = ({ children }) => {
         const allPosts = [];
         for (const event of dappMyMusicPosts) {
             const trackInfo = await getTrackIMGURI(event.args.post.spotifyID);
-            console.log(allPosts);
             allPosts.push({
                 user: event.args.op, 
                 userName: event.args.post.userName,
@@ -358,7 +357,6 @@ export const DappMyMusicProvider = ({ children }) => {
     const refreshToken = async () => {   
         const refreshToken = localStorage.getItem('refresh_token');
         if(!refreshToken){
-            console.log("No refresh token, generate new access_token");
             await getToken();
         }
         const url = "https://accounts.spotify.com/api/token";
@@ -391,7 +389,6 @@ export const DappMyMusicProvider = ({ children }) => {
         const now = Date.now();
 
         if(now - tokenIssuedAt > expiresIn - 5000) {
-            console.log("Token expired or about to expire, refreshing...");
             await refreshToken();
         }
         if(isAuthorized) {
@@ -400,16 +397,15 @@ export const DappMyMusicProvider = ({ children }) => {
             const elapsedTime = Date.now() - issuedAt;
             const remainingTime = expiresIn - elapsedTime;
 
-            console.log(`Token issued at: ${new Date(issuedAt).toISOString()}`);
-            console.log(`Elapsed time: ${elapsedTime / 1000}s`);
-            console.log(`Remaining time: ${remainingTime / 1000}s`);
+            //console.log(`Token issued at: ${new Date(issuedAt).toISOString()}`);
+            //console.log(`Elapsed time: ${elapsedTime / 1000}s`);
+            //console.log(`Remaining time: ${remainingTime / 1000}s`);
 
             // If remaining time is too low, refresh immediately
             const refreshTime = Math.max(remainingTime - 100 * 1000, 5000);
             const time = 10000;
             
             setTimeout(async () => {
-                console.log("refreshing...");
                 await refreshToken();
                 scheduleTokenRefresh(); // Reschedule after refresh
             }, refreshTime);
@@ -529,7 +525,6 @@ export const DappMyMusicProvider = ({ children }) => {
     //Used to play the next track on the current list.
     const skipToNextTrack = async () => {
         if(!currentTrack.playlist) return alert("Select a track to play");
-        console.log(currentTrack);
         if(currentTrack.index == currentTrack.playlist.length - 1){
             await setTrackByURI(currentTrack.playlist[0].trackURI);
             await setNextTrack(currentTrack.playlist, 0);
@@ -546,13 +541,11 @@ export const DappMyMusicProvider = ({ children }) => {
     //Used to play previous track on the current list.
     const skipToPreviousTrack = async () => {
         if(!currentTrack.playlist) return alert("Select a track to play");
-        console.log(currentTrack);
         if(currentTrack.index == 0){
             await setTrackByURI(currentTrack.playlist[currentTrack.playlist.length-1].trackURI);
             await setNextTrack(currentTrack.playlist, currentTrack.playlist.length-1);
             return;
         } else if(currentTrack.index > 0 && currentTrack.index < currentTrack.playlist.length){
-            console.log("is it working?");
             await setTrackByURI(currentTrack.playlist[currentTrack.index-1].trackURI);
             await setNextTrack(currentTrack.playlist, currentTrack.index-1);
             return;
