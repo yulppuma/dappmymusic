@@ -208,7 +208,6 @@ export const DappMyMusicProvider = ({ children }) => {
         const latestBlock = await provider.getBlockNumber();
         let endBlock = latestBlock;
 
-        console.log("Latest block: " + latestBlock);
         while (dappMyMusicPosts.length < 10 && endBlock > 8113257){
             const startBlock = Math.max(endBlock - 4000, 8113257);
             try{
