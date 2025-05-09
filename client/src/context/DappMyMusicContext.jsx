@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import { Buffer } from 'buffer';
 
 import { contractABI, contractAddress } from '../utils/constants';
-import { spotifyClientID, spotifyClientSecret } from '../utils/constants';
+import { spotifyClientID } from '../utils/constants';
 
 export const DappMyMusicContext = React.createContext();
 
@@ -208,7 +208,8 @@ export const DappMyMusicProvider = ({ children }) => {
         const latestBlock = await provider.getBlockNumber();
         let endBlock = latestBlock;
 
-        while (dappMyMusicPosts.length < 10 && endBlock > 8113257){
+        //Pulls the last 10 posts or the past ~7 days
+        while (dappMyMusicPosts.length < 10 && endBlock > latestBlock - 50000){
             const startBlock = Math.max(endBlock - 4000, 8113257);
             try{
                 const events = await DMMContract.queryFilter("NewPost", startBlock, endBlock);
