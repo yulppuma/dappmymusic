@@ -302,7 +302,8 @@ export const DappMyMusicProvider = ({ children }) => {
         const hashed = await sha256(codeVerifier)
         const codeChallenge = base64encode(hashed);
     
-        const redirectUri = 'http://localhost:5173/';
+        //const redirectUri = 'http://localhost:5173/';
+        const redirectUri = 'https://dappmymusic.vercel.app/';
     
         const scope = 'streaming user-read-private user-read-email user-modify-playback-state';
         const authUrl = new URL("https://accounts.spotify.com/authorize");
@@ -330,7 +331,8 @@ export const DappMyMusicProvider = ({ children }) => {
         if(!!code){
             const codeVerifier = localStorage.getItem('code_verifier');
             const url = "https://accounts.spotify.com/api/token";
-            const redirectUri = 'http://localhost:5173/';
+            //const redirectUri = 'http://localhost:5173/';
+            const redirectUri = 'https://dappmymusic.vercel.app/';
             const payload = {
             method: 'POST',
             headers: {
