@@ -24,7 +24,7 @@ const Music = () => {
                 <div className="flex flex-col w-full justify-start justify-between pt-35">
                     {/* My Top 5 Posts*/}
                     <div className="flex ml-6">
-                        <h1 className="text-[#036AA4] font-bold">My Top 5</h1>
+                        <h1 className="font-bold">My Top 5</h1>
                     </div>
                     <div className="flex flex-col w-full">
                         <ul className="flex flex-col w-full">
@@ -64,7 +64,7 @@ const Music = () => {
                     </div>
                     {/* My Posts */}
                     <div className="flex ml-6">
-                        <h1 className="text-[#036AA4] font-bold">My Posts</h1>
+                        <h1 className="font-bold">My Posts</h1>
                     </div>
                     <div className="flex flex-col w-full">
                         <ul className="flex flex-col w-full">
@@ -112,7 +112,7 @@ const Music = () => {
                     </div>
                     {/* All Posts */}
                     <div className="flex ml-6 scroll-mt-35" id="new-posts">
-                        <h1 className="text-[#036AA4] font-bold">New Posts</h1>
+                        <h1 className=" font-bold">New Posts</h1>
                     </div>
                     <div className="flex flex-col w-full pb-15">
                         <ul className="flex flex-col w-full">
